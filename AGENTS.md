@@ -128,7 +128,7 @@ npm run lint      # Запуск ESLint
 - Не храните секреты в коде
 
 ### GitHub Actions
-Автоматический деплой на GitHub Pages будет настроен после инициализации.
+`.github/workflows/deploy.yml` собирает проект и публикует `dist/` на GitHub Pages при каждом push в `main`.
 
 ## Что НЕ делать
 
@@ -144,22 +144,32 @@ npm run lint      # Запуск ESLint
 
 ## Дизайн-система
 
+Все токены заданы в `src/styles/index.css` через `@theme` (Tailwind CSS 4). Файла `tailwind.config.js` нет: Tailwind 4 его не читает.
+
 ### Цвета
-Основная палитра определена в `tailwind.config.js`:
-- Primary: оттенки синего (blue-50 до blue-950)
-- Используйте утилиты Tailwind для консистентности
+Монохромная палитра, светлые секции и одна тёмная (контакты + футер):
+- Фон и поверхности: `paper`, `surface`, `raised`
+- Текст на светлом: `ink` (основной), `ink-2` (вторичный), `ink-3` (приглушённый, только для меты)
+- Тёмные секции: `night`, `night-2`, `night-3`, текст `snow`, `snow-2`, `snow-3`
+- Линии: `line`, `line-strong`, `line-night` (волосяные, 8–16% прозрачности)
+- `redline` — единственный цветной акцент, только для «редлайнов» в макете героя. Не используйте его в кнопках и тексте
 
 ### Типографика
-- **Основной шрифт:** Inter
-- **Заголовки:** Poppins
-- Определены в `tailwind.config.js`
+- **Интерфейс и заголовки:** Inter (400/500/600). Space Grotesk и Poppins не поддерживают кириллицу — не возвращайте их
+- **Мета, номера, код:** JetBrains Mono
+- Иерархия — размером и цветом, а не жирностью. Без uppercase-лейблов и курсива
+
+### Компоненты и иконки
+- `components/ui/ButtonLink` — кнопки-ссылки (`primary`/`secondary`, тон `paper`/`night`)
+- `components/ui/SectionHeader` — шапка секции: номер моно + заголовок
+- Иконки: `lucide-react`, 16–24px, `strokeWidth={1.5}`, цвет текста
 
 ### Анимации
-Предопределённые в Tailwind config:
-- `animate-fade-in` - плавное появление
-- `animate-slide-up` - скольжение вверх
-- `animate-slide-down` - скольжение вниз
-- `animate-scale-in` - масштабирование
+- Framer Motion через `LazyMotion` + `m` (не используйте `motion.*` — включён `strict`)
+- `components/animations/Reveal` — одно появление при скролле (fade + 8px)
+- Кривая `ease-soft` (`cubic-bezier(0.22, 1, 0.36, 1)`), 150 мс на hover, 400 мс на появление
+- `MotionConfig reducedMotion="user"` + CSS-фолбэк для `prefers-reduced-motion`
+- Без бесконечных анимаций, bounce и `transition-all`
 
 ## Контакты и вопросы
 
@@ -171,3 +181,4 @@ npm run lint      # Запуск ESLint
 ## История изменений
 
 - **2026-11-10:** Инициализация проекта, базовая настройка Vite + React + TypeScript + Tailwind
+- **2026-11-12:** Переход на Tailwind 4 `@theme` (утилиты не генерировались), редизайн всех секций, секция «Процесс», lucide-react

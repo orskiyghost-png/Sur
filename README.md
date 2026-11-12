@@ -76,8 +76,9 @@ Sur/
 │   ├── sections/       # Секции страницы
 │   │   ├── Hero/      # Главная секция
 │   │   ├── About/     # О себе
-│   │   ├── Portfolio/ # Портфолио/проекты
-│   │   ├── Skills/    # Навыки
+│   │   ├── Skills/    # Направления работы
+│   │   ├── Process/   # Как я работаю
+│   │   ├── Projects/  # Проекты
 │   │   └── Contact/   # Контакты
 │   ├── data/          # Данные (проекты, навыки, тексты)
 │   ├── hooks/         # Кастомные React хуки
@@ -88,7 +89,6 @@ Sur/
 │   └── main.tsx       # Точка входа
 ├── index.html          # HTML шаблон
 ├── vite.config.ts      # Конфигурация Vite
-├── tailwind.config.js  # Конфигурация Tailwind
 ├── tsconfig.json       # Конфигурация TypeScript
 └── package.json        # Зависимости и скрипты
 ```
@@ -103,7 +103,8 @@ Sur/
 - [Vite 8.3.7](https://vitejs.dev/) - Build tool
 
 ### Styling & Animation
-- [Tailwind CSS 4.3.5](https://tailwindcss.com/) - Утилитарный CSS
+- [Tailwind CSS 4.3.5](https://tailwindcss.com/) - Утилитарный CSS (токены в `@theme`)
+- [lucide-react](https://lucide.dev/) - Иконки
 - [Framer Motion 14.11.1](https://www.framer.com/motion/) - Библиотека анимаций
 - PostCSS + Autoprefixer - Обработка CSS
 
@@ -120,21 +121,16 @@ Sur/
 
 ### Цветовая палитра
 
-Основана на голубых оттенках (`primary`), определённых в `tailwind.config.js`:
-- `primary-50` до `primary-950` - 11 оттенков синего
+Монохромная палитра с одним акцентом (`redline`) только для макета в первом экране. Токены задаются в `src/styles/index.css` через `@theme`.
 
 ### Типографика
 
-- **Основной шрифт:** Inter
-- **Заголовки:** Poppins
+- **Интерфейс и заголовки:** Inter
+- **Мета и номера:** JetBrains Mono
 
 ### Анимации
 
-Предустановленные анимации:
-- `animate-fade-in` - Плавное появление
-- `animate-slide-up` - Скольжение вверх
-- `animate-slide-down` - Скольжение вниз  
-- `animate-scale-in` - Масштабирование
+Framer Motion (`LazyMotion`), одно появление секций при скролле, уважение `prefers-reduced-motion`.
 
 ---
 
@@ -142,7 +138,7 @@ Sur/
 
 Проект настроен для развёртывания на GitHub Pages.
 
-### Автоматический деплой (будет настроен)
+### Автоматический деплой
 
 После push в `main` ветку GitHub Actions автоматически:
 1. Соберёт проект (`npm run build`)
