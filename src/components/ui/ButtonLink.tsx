@@ -12,21 +12,21 @@ interface ButtonLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-[background-color,border-color,color,transform] duration-150 ease-soft active:scale-[0.98]';
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-[background-color,color,transform] duration-150 ease-soft active:translate-y-px';
 
 const sizes: Record<Size, string> = {
-  md: 'h-12 rounded-[10px] px-5 text-[15px]',
-  sm: 'h-9 rounded-lg px-4 text-sm',
+  md: 'h-12 rounded-lg px-5 text-[15px]',
+  sm: 'h-9 rounded-md px-4 text-sm',
 };
 
 const variants: Record<Tone, Record<Variant, string>> = {
   paper: {
-    primary: 'bg-ink text-paper hover:bg-[#2b2b2a]',
-    secondary: 'border border-line-strong bg-surface text-ink hover:bg-raised',
+    primary: 'bg-cobalt text-surface hover:bg-cobalt-hover',
+    secondary: 'bg-cobalt-soft text-cobalt hover:bg-sky-soft',
   },
   night: {
-    primary: 'bg-snow text-night hover:bg-white',
-    secondary: 'border border-line-night bg-night-2 text-snow hover:bg-night-3',
+    primary: 'bg-snow text-night hover:bg-surface',
+    secondary: 'bg-night-2 text-snow hover:bg-night-3',
   },
 };
 
