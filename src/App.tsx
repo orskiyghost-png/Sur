@@ -14,7 +14,7 @@ export default function App() {
       <MotionConfig reducedMotion="user">
         <a
           href="#main"
-          className="sr-only z-[60] rounded-lg bg-ink px-4 py-2 text-sm text-paper focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="sr-only z-[60] rounded-md bg-cobalt px-4 py-2 text-sm text-surface focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
         >
           Перейти к содержанию
         </a>
