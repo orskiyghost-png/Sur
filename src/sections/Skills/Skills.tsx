@@ -1,42 +1,45 @@
-import { skills } from '../../data/content';
+import Reveal from '../../components/animations/Reveal';
+import SectionHeader from '../../components/ui/SectionHeader';
+import { skills, skillsHeading } from '../../data/content';
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-padding bg-gray-50">
-      <div className="container-custom">
-        <h2 
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-16 text-black text-center"
-          style={{ fontFamily: 'var(--font-heading)' }}
-        >
-          Направления работы
-        </h2>
+    <section id="skills" aria-labelledby="skills-title" className="section-y bg-surface">
+      <div className="container-page">
+        <Reveal>
+          <SectionHeader id="skills-title" index={skillsHeading.index} title={skillsHeading.title} />
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <ul className="mt-12 md:mt-16">
           {skills.map((skill, index) => (
-            <div 
+            <Reveal
+              as="li"
               key={skill.id}
-              className="bg-white p-8 rounded-lg border border-gray-200 hover:border-gray-400 transition-colors"
+              delay={index * 0.05}
+              className="grid gap-4 border-t border-line py-10 last:border-b md:grid-cols-12 md:gap-8 md:py-12"
             >
-              {/* Number */}
-              <div className="text-sm text-gray-400 font-mono mb-4">
-                0{index + 1}
-              </div>
-
-              {/* Title */}
-              <h3 
-                className="text-xl md:text-2xl font-semibold mb-4 text-black"
-                style={{ fontFamily: 'var(--font-heading)' }}
-              >
+              <span className="font-mono text-[13px] text-ink-3 tabular-nums md:col-span-2 md:pt-1.5">
+                {skillsHeading.index}.{index + 1}
+              </span>
+              <h3 className="text-balance text-2xl leading-[1.25] font-medium tracking-[-0.015em] md:col-span-4">
                 {skill.title}
               </h3>
-
-              {/* Description */}
-              <p className="text-base text-gray-600 leading-relaxed">
-                {skill.description}
-              </p>
-            </div>
+              <div className="md:col-span-6">
+                <p className="text-pretty text-base leading-[1.7] text-ink-2">{skill.description}</p>
+                <ul className="mt-6 flex flex-wrap gap-2" aria-label="Фокус">
+                  {skill.focus.map((focus) => (
+                    <li
+                      key={focus}
+                      className="rounded-md border border-line bg-paper px-2.5 py-1 text-[13px] leading-5 text-ink-2"
+                    >
+                      {focus}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
